@@ -2,15 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>LyricProf</title>
     <link rel="stylesheet" href="css/index-stylesheet.css" />
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
 </head>
 <body ng-app="app" ng-init="test='Hello World'">
-    <div ng-controller="ctrl">
-        {{test}}
+    <div id="main" ng-controller="ctrl">
+        <div id="site-navbar">
+            <a id="brand-logo" href="index.html">
+                LyricProf
+            </a>
+            <a id="about" class="navbar-link" href="about.html">
+                About
+            </a>
+        </div>
+        <div class="container">
+            <label for="song-search">Song:</label>
+            <input id="song-search" type="text" name="song" ng-model="search_song">
+            <label for="artist-search">Artist:</label>
+            <input id="artist-search" type="text" name="artist" ng-model="search_artist">
+            <div ng-click="search()">Search</div>
+        </div>
     </div>
 </body>
 </html>
