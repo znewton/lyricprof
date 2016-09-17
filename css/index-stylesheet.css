@@ -120,10 +120,30 @@ body{
 .alert-success {
     border-color: #595;
     background-color: #8d8;
-    color: #595
+    color: #595;
 }
 .alert-error {
     border-color: #955;
     background-color: #d88;
-    color: #955
+    color: #955;
+}
+.alert-warning {
+    border-color: #a72;
+    background-color: #eb3;
+    color: #a72;
+}
+
+.lyrics {
+    display: inline-block;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #444;
+    padding: 10px 3px;
+    font-size: 20px;
+    color: #ddd;
+    margin-top: 10px;
+    min-width:600px;
+}
+.flagged {
+    color: #e55;
 }

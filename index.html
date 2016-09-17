@@ -38,11 +38,24 @@
                 <br>
                 <div class="btn full-width" ng-click="search()">Search</div>
             </div>
-            <div class="alert alert-success full-width ng-cloak" ng-show="song_found">
-                <i class="fa fa-check" aria-hidden="true"></i> Success
-            </div>
             <div class="alert alert-error full-width ng-cloak" ng-show="song_unfound">
                 <i class="fa fa-times" aria-hidden="true"></i> Error
+            </div>
+            <div class="alert alert-success full-width" ng-show="song_found && !dirty">
+                <i class="fa fa-check" aria-hidden="true"></i>  Clean
+            </div>
+            <div class="alert alert-warning full-width" ng-show="dirty">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  Dirty
+            </div>
+            <div class="flagged lyrics" ng-show="dirty">
+                <div ng-repeat="l in flaggedLyrics track by $index">
+                    {{l}}
+                </div>
+            </div>
+            <div class="lyrics" ng-show="song_found">
+                <div ng-repeat="l in fullLyrics track by $index">
+                    {{l}}
+                </div>
             </div>
         </div>
     </div>
