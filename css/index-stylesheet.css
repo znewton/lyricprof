@@ -90,6 +90,7 @@ body{
 }
 .full-width{
     width: 606px;
+    display: block;
 }
 .btn{
     display: inline-block;

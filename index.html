@@ -20,6 +20,7 @@
         </div>
         <div class="container">
             <div id="top-space"></div>
+
             <div class="form">
                 <div class="form-input">
                     <label for="song-search">Song</label>
@@ -29,7 +30,12 @@
                     <label for="artist-search">Artist</label>
                     <input id="artist-search" type="text" name="artist" placeholder="Artist" ng-model="search_artist">
                 </div>
+                <br>
                 <div class="btn full-width" ng-click="search()">Search</div>
+            </div>
+
+            <div id="result">
+                {{resultTest}}
             </div>
         </div>
     </div>
