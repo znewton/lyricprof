@@ -7,6 +7,8 @@
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="http://tracking.musixmatch.com/t1.0/AMa6hJCIEzn1v8RuOP"></script>
+    <link rel="stylesheet" href="lib/font-awesome-4.6.3/css/font-awesome.min.css">
 </head>
 <body ng-app="app" ng-init="test='Hello World'">
     <div id="main" ng-controller="ctrl">
@@ -31,7 +33,13 @@
                     <input id="artist-search" type="text" name="artist" placeholder="Artist" ng-model="search_artist">
                 </div>
                 <br>
-                <button class="btn full-width" ng-click="search()" disabled>Search</button>
+                <button class="btn full-width" ng-click="search()">Search</button>
+            </div>
+            <div class="alert alert-success full-width" ng-show="song_found">
+                <i class="fa fa-check" aria-hidden="true"></i> Song found
+            </div>
+            <div class="alert alert-error full-width" ng-show="song_unfound">
+                <i class="fa fa-times" aria-hidden="true"></i> Song not found
             </div>
 
             <div id="result">

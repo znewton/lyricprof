@@ -107,3 +107,23 @@ body{
     background-color: rgb(200,100,0);
     cursor: pointer;
 }
+
+.alert {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 6px 8px;
+    margin: 5px auto;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+}
+.alert-success {
+    border-color: #595;
+    background-color: #8d8;
+    color: #595
+}
+.alert-error {
+    border-color: #955;
+    background-color: #d88;
+    color: #955
+}
