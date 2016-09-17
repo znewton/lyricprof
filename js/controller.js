@@ -1,7 +1,6 @@
 app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
     $scope.search_song = '';
     $scope.search_artist = '';
-    $scope.resultTest = '';
     $scope.song_found = false;
     $scope.song_unfound = false;
 
@@ -19,18 +18,8 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
             artist: $scope.search_artist
         };
 //apiUrl + trackSearchUrl
-        $http.get(testURL, postObj).then(function(response) {
-            $scope.resultTest = 'Success';
-            $scope.song_found = true;
-            $scope.song_unfound = false;
-            console.log(response);
-
-        }, function(response) {
-            $scope.resultTest = 'Failure';
-            $scope.song_unfound = true;
-            $scope.song_found = false;
-            console.log(response);
-
-        })
+        $.post( testURL, postObj, function( data ) {
+            console.log( data );
+        }, "json");
     }
 }]);
