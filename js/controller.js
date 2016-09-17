@@ -1,10 +1,11 @@
 app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
-    $scope.search_song = 'rap god';
-    $scope.search_artist = 'eminem';
+    $scope.search_song = '';
+    $scope.search_artist = '';
     $scope.song_found = false;
     $scope.song_unfound = false;
     $scope.clean = false;
     $scope.dirty = false;
+    $scope.searching = false;
 
     const apiUrl = 'http://api.musixmatch.com/ws/1.1/';
     const trackSearchUrl = 'track.search';
@@ -33,18 +34,23 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
 //             $scope.song_unfound = true;
 //             console.log(data);
 //         });
-        $http.post(testURL, postObj, []).then(function(response){
-            success();
-            console.log(response);
-            $scope.flaggedLyrics = response.data.flags;
-            $scope.fullLyrics = response.data.lyrics;
-            if($scope.flaggedLyrics.length > 0){
-                $scope.dirty = true;
-            }
-        }, function(response){
-            fail();
-            console.log(response);
-        })
+        if($scope.search_song != '' && $scope.search_artist != '') {
+            $scope.searching = true;
+            $http.post(testURL, postObj, []).then(function (response) {
+                success();
+                $scope.searching=false;
+                console.log(response);
+                $scope.flaggedLyrics = response.data.flags;
+                $scope.fullLyrics = response.data.lyrics;
+                if ($scope.flaggedLyrics.length > 0) {
+                    $scope.dirty = true;
+                }
+            }, function (response) {
+                fail();
+                $scope.searching=false;
+                console.log(response);
+            });
+        }
 
     };
 

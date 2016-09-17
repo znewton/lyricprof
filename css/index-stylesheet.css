@@ -31,6 +31,16 @@ body{
     padding: 25px 10px;
     text-align: center;
     box-shadow: -2px 0 3px -1px rgba(0,0,0,0.25), 2px 0 3px -1px rgba(0,0,0,0.25);
+    color: #333;
+    font-size: 20px;
+}
+
+.container a{
+    color: rgb(170,80,0);
+    text-decoration: none;
+}
+.container a:hover{
+    color: rgb(200,100,0);
 }
 
 #site-navbar a {

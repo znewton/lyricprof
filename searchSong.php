@@ -15,6 +15,7 @@ function flagLyrics($lyrics){
         foreach (naughtyWords as $naughtyWord){
             if (strpos($line, $naughtyWord)) {
                 $flags[] = $line;
+//                $flags[] = str_replace($naughtyWord, strtoupper($naughtyWord), $line);
                 break;
             }
         }
