@@ -62,14 +62,13 @@ body{
     display: inline-block;
     position: relative;
     text-align: left;
-    width: 45%;
 }
 .form .form-input input[type=text]{
     display: inline-block;
     height: 25px;
     border: 1px solid #555555;
     border-radius: 5px;
-    width: 95%;
+    width: 300px;
     font-size: 24px;
     padding-left: 6px;
     padding-top: 6px;
@@ -90,7 +89,7 @@ body{
     height: 50px;
 }
 .full-width{
-    width: 87%;
+    width: 606px;
 }
 .btn{
     display: inline-block;
