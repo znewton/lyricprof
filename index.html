@@ -19,11 +19,18 @@
             </a>
         </div>
         <div class="container">
-            <label for="song-search">Song:</label>
-            <input id="song-search" type="text" name="song" ng-model="search_song">
-            <label for="artist-search">Artist:</label>
-            <input id="artist-search" type="text" name="artist" ng-model="search_artist">
-            <div ng-click="search()">Search</div>
+            <div id="top-space"></div>
+            <div class="form">
+                <div class="form-input">
+                    <label for="song-search">Song</label>
+                    <input id="song-search" type="text" name="song" placeholder="Song" ng-model="search_song">
+                </div>
+                <div class="form-input">
+                    <label for="artist-search">Artist</label>
+                    <input id="artist-search" type="text" name="artist" placeholder="Artist" ng-model="search_artist">
+                </div>
+                <div class="btn full-width" ng-click="search()">Search</div>
+            </div>
         </div>
     </div>
 </body>
