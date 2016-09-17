@@ -1,6 +1,6 @@
 app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
-    $scope.search_song = 'closer';
-    $scope.search_artist = 'The_Chainsmokers';
+    $scope.search_song = '';
+    $scope.search_artist = '';
     $scope.resultTest = '';
 
     const wikiaSearchURL = 'http://lyrics.wikia.com/wiki/';
