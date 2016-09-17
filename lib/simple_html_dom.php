@@ -37,7 +37,6 @@
  * @package PlaceLocalInclude
  * @subpackage simple_html_dom
  */
-
 /**
  * All of the Defines for the classes below.
  * @author S.C. Chen <me578022@gmail.com>

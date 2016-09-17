@@ -42,6 +42,9 @@
             <div style="margin-top: 10px;" ng-show="searching">
                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
             </div>
+            <div class="alert alert-error full-width ng-cloak" ng-show="error">
+                <i class="fa fa-times" aria-hidden="true"></i> Error
+            </div>
             <div class="alert alert-error full-width ng-cloak" ng-show="song_unfound">
                 <i class="fa fa-times" aria-hidden="true"></i> Song Not Found
             </div>

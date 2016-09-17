@@ -17,6 +17,8 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
     $scope.search = function() {
         $scope.song_found = false;
         $scope.song_unfound = false;
+        $scope.dirty = false;
+        $scope.error = false;
         console.log('search');
         //https://developer.musixmatch.com/documentation/input-parameters
         var postObj = {
@@ -37,16 +39,20 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
         if($scope.search_song != '' && $scope.search_artist != '') {
             $scope.searching = true;
             $http.post(testURL, postObj, []).then(function (response) {
-                success();
                 $scope.searching=false;
                 console.log(response);
                 $scope.flaggedLyrics = response.data.flags;
                 $scope.fullLyrics = response.data.lyrics;
-                if ($scope.flaggedLyrics.length > 0) {
+                if ($scope.flaggedLyrics && $scope.flaggedLyrics.length > 0) {
                     $scope.dirty = true;
                 }
+                if ($scope.fullLyrics && $scope.fullLyrics.length > 0){
+                    success();
+                } else {
+                    fail();
+                }
             }, function (response) {
-                fail();
+                $scope.error = true;
                 $scope.searching=false;
                 console.log(response);
             });
