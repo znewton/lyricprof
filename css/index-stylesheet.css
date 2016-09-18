@@ -319,8 +319,10 @@ body{
     }
     .song-title {
         font-size: 9vw;
+        display: block;
     }
     .artist-title {
         font-size: 7vw;
+        display: block;
     }
 }
