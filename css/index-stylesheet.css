@@ -218,3 +218,26 @@ body{
     font-size: 20px;
     font-weight: 500;
 }
+
+@media screen and (max-device-width: 600px) {
+    #main{
+        height: 100vh;
+        width: 100vw;
+    }
+    #site-navbar {
+        height: 5.2vh;
+        width: 100vw;
+    }
+    #site-navbar a {
+        height: 5.2vh;
+        font-size: 4vh;
+        /*display: table-cell;*/
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
+    #site-navbar #brand-logo {
+        font-size: 4.5vh;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+}
