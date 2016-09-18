@@ -15,9 +15,13 @@ function flagLyrics($lyrics, $naughty){
     $flags = [];
     foreach ($lyrics as $line) {
         foreach ($naughty as $naughtyWord){
-            if (stripos($line, $naughtyWord)) {
-//                $flags[] = $line;
-                $flags[] = str_replace($naughtyWord, '<strong>'.$naughtyWord.'</strong>', $line);
+            if (strpos(strtolower($line), strtolower($naughtyWord))) {
+                $flaggedLine = $line;
+                foreach ($naughty as $badWord) {
+                    $flaggedLine = str_replace($badWord, '<strong>'.$badWord.'</strong>', $flaggedLine);
+                    $flaggedLine = str_replace(ucfirst($badWord), '<strong>'.ucfirst($badWord).'</strong>', $flaggedLine);
+                }
+                $flags[] = $flaggedLine;
                 break;
             }
         }
@@ -33,8 +37,8 @@ $url="http://lyrics.wikia.com/wiki/" . $artist . ":" . $song;
 $html = new simple_html_dom();
 //$html = file_get_html($url);
 $attemps = 0;
-$div = '';
-while($attemps < 4 && $div == ''){
+$div = null;
+while($attemps < 20 && !$div){
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
     curl_setopt($curl, CURLOPT_HEADER, false);
