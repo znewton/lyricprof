@@ -17,6 +17,33 @@ $song = myUrlEncode($song);
 $artist = $postdata->artist;
 $artist = myUrlEncode($artist);
 
+/**
+ * @param $attemptNum
+ * @param $attemptMultiplier
+ * @param $song
+ * @param $artist
+ *
+ * @return array
+ */
+function alterSearchFormat($attemptNum, $attemptMultiplier,  $song, $artist) {
+    //TODO: try camelcase song,
+    //TODO: add a the to beginning of song, artist, both
+    if ($attemptNum > 3*$attemptMultiplier) {
+        //TODO: replace " and " with " & " in song and artist
+    }
+    elseif ($attemptNum > 2*$attemptMultiplier) {
+        //TODO: replace " and " with " & " in song
+    }
+    elseif ($attemptNum > 1*$attemptMultiplier) {
+        //TODO: replace " and "  with " & "  in artist
+    }
+
+    //default return statement. Unformatted search
+     return [
+         'song' => $song,
+          'artist' => $artist,
+     ];
+}
 
 function flagLyrics($lyrics, $naughty){
     $flags = [];
@@ -39,12 +66,19 @@ function flagLyrics($lyrics, $naughty){
 //$url = 'http://www.azlyrics.com/lyrics/'.$artist.'/'.$song.'.html';
 //
 error_reporting(E_ERROR);
-$url="http://lyrics.wikia.com/wiki/" . $artist . ":" . $song;
 //$html = file_get_html($url);
 $attempts = 0;
 $div = null;
+$attemptMultiplier = 3;
+$numFormatChecks = 0; // number of additional formatting attempt checks to try. 0 is base format only
 
-while($attempts < 20 && !$div){
+while($attempts < ($attemptMultiplier*($numFormatChecks+1)) && !$div){
+
+    $searchFormat = alterSearchFormat($attempts, $attemptMultiplier, $song, $artist);
+    $search_song = $searchFormat['song'];
+    $search_artist = $searchFormat['artist'];
+    $url="http://lyrics.wikia.com/wiki/" . $search_artist . ":" . $search_song;
+
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
     curl_setopt($curl, CURLOPT_HEADER, false);
