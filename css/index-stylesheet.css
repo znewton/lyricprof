@@ -154,7 +154,12 @@ body{
     color: #ddd;
     margin-top: 10px;
     min-width:51%;
+    width: 606px;
 }
 .flagged {
+    color: #a55;
+
+}
+.flagged strong{
     color: #e55;
 }

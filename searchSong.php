@@ -16,8 +16,8 @@ function flagLyrics($lyrics, $naughty){
     foreach ($lyrics as $line) {
         foreach ($naughty as $naughtyWord){
             if (stripos($line, $naughtyWord)) {
-                $flags[] = $line;
-//                $flags[] = str_replace($naughtyWord, strtoupper($naughtyWord), $line);
+//                $flags[] = $line;
+                $flags[] = str_replace($naughtyWord, '<strong>'.$naughtyWord.'</strong>', $line);
                 break;
             }
         }

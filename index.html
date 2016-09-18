@@ -5,6 +5,7 @@
     <title>LyricProf</title>
     <link rel="stylesheet" href="css/index-stylesheet.css" />
     <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="lib/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
@@ -44,6 +45,9 @@
             </div>
             <div class="alert alert-error full-width ng-cloak" ng-show="error">
                 <i class="fa fa-times" aria-hidden="true"></i> Error
+                <div style="font-weight: 500; text-align: left">
+                    Try again?
+                </div>
             </div>
             <div class="alert alert-error full-width ng-cloak" ng-show="song_unfound">
                 <i class="fa fa-times" aria-hidden="true"></i> Song Not Found <br>
@@ -73,12 +77,12 @@
             </div>
 
             <div class="flagged lyrics" ng-show="dirty">
-                <div ng-repeat="l in flaggedLyrics track by $index">
-                    {{l}}
-                </div>
+                <span style="font-weight: 600; opacity: 0.5;">Flagged Lyrics</span>
+                <div ng-repeat="l in flaggedLyrics track by $index" ng-bind-html="l"></div>
             </div>
 
             <div class="lyrics" ng-show="song_found">
+                <span style="font-weight: 600; opacity: 0.5;">Full Lyrics</span>
                 <div ng-repeat="l in fullLyrics track by $index">
                     {{l}}
                 </div>
