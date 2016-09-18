@@ -79,8 +79,8 @@ body{
     width: 45%;
 }
 .form .form-input:nth-child(1) input{
-    margin-right: 20px;
-}
+     margin-right: 20px;
+ }
 .form .form-input:nth-child(2) input{
     margin-left: 20px;
 }
@@ -225,6 +225,7 @@ body{
         width: 100vw;
     }
     #site-navbar {
+        position: fixed;
         height: 5.2vh;
         width: 100vw;
     }
@@ -239,5 +240,51 @@ body{
         font-size: 4.5vh;
         padding-left: 2vw;
         padding-right: 2vw;
+    }
+
+    .container {
+        width: 98vw;
+        min-height: 100vh;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    #top-space {
+        height: 5.5vh;
+    }
+    .form{
+        width: 99%;
+    }
+    .form .form-input {
+        width: 100%;
+        margin-bottom: 1vh;
+    }
+    .form .form-input:nth-child(1) input{
+        margin-right: 0;
+    }
+    .form .form-input:nth-child(2) input{
+        margin-left: 0;
+    }
+    .form .form-input input[type=text]{
+        display: block;
+        height: 4vh;
+        border-radius: 0.5vh;
+        font-size: 3.5vh;
+        padding-left: 1vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        max-width: 98%;
+        width: 98%;
+    }
+
+    .full-width {
+        width: 98%;
+        max-width: 98%;
+    }
+
+    .btn{
+        padding: 0.5vh 1vw;
+        margin: 0.5vh auto;
+        border-radius: 0.5vh;
+        font-size: 3.5vh;
     }
 }
