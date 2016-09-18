@@ -29,31 +29,33 @@ function flagLyrics($lyrics, $naughty){
 //
 //error_reporting(0);
 $url="http://lyrics.wikia.com/wiki/" . $artist . ":" . $song;
-//$html = file_get_html($url);
-$curl = curl_init();
-curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-curl_setopt($curl, CURLOPT_HEADER, false);
-curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-curl_setopt($curl, CURLOPT_URL, $url);
-curl_setopt($curl, CURLOPT_REFERER, $url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 5);
-curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
-$str = curl_exec($curl);
-curl_close($curl);
-
 // Create a DOM object
 $html = new simple_html_dom();
-// Load HTML from a string
-$html->load($str);
-if($html && $html->find('div[class=lyricbox]')) {
-    $div = $html->find('div[class=lyricbox]')[0]->plaintext;
-} else {
-    $div = '';
+//$html = file_get_html($url);
+$attemps = 0;
+$div = '';
+while($attemps < 4 && $div == ''){
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_REFERER, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 5);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
+    $str = curl_exec($curl);
+    curl_close($curl);
+
+    // Load HTML from a string
+    $html->load($str);
+    if($html && $html->find('div[class=lyricbox]')) {
+        $div = $html->find('div[class=lyricbox]')[0]->plaintext;
+    }
+    $html->clear();
+    unset($html);
 }
 
-$html->clear();
-unset($html);
 
 
 $lyric= html_entity_decode($div);
