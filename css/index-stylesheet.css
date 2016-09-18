@@ -155,6 +155,10 @@ body{
     background-color: #eb3;
     color: #a72;
 }
+.alert-description {
+    font-weight: 500;
+    text-align: left;
+}
 
 .lyrics {
     display: inline-block;
@@ -176,10 +180,6 @@ body{
     color: #e55;
 }
 
-.alert-description {
-    font-weight: 500;
-    text-align: left;
-}
 .collapsed-true .alert-description {
     height: 0;
     visibility: collapse;
@@ -226,37 +226,40 @@ body{
     }
     #site-navbar {
         position: fixed;
-        height: 5.2vh;
+        height: 10vw;
         width: 100vw;
     }
     #site-navbar a {
-        height: 5.2vh;
-        font-size: 4vh;
+        height: 10vw;
+        font-size: 6vw;
         /*display: table-cell;*/
         padding-left: 1vw;
         padding-right: 1vw;
     }
     #site-navbar #brand-logo {
-        font-size: 4.5vh;
+        font-size: 7vw;
         padding-left: 2vw;
         padding-right: 2vw;
     }
 
     .container {
-        width: 98vw;
+        width: 100vw;
         min-height: 100vh;
         margin-left: 0;
         margin-right: 0;
+        padding: 0;
     }
     #top-space {
-        height: 5.5vh;
+        height: 11vw;
     }
     .form{
-        width: 99%;
+        max-width: 99%;
+        width: 97%;
+        margin: 0 1%;
     }
     .form .form-input {
         width: 100%;
-        margin-bottom: 1vh;
+        margin-bottom: 2vw;
     }
     .form .form-input:nth-child(1) input{
         margin-right: 0;
@@ -266,10 +269,10 @@ body{
     }
     .form .form-input input[type=text]{
         display: block;
-        height: 4vh;
-        border-radius: 0.5vh;
-        font-size: 3.5vh;
-        padding-left: 1vw;
+        height: 9vw;
+        border-radius: 1vw;
+        font-size: 6vw;
+        padding-left: 3vw;
         padding-top: 1vw;
         padding-bottom: 1vw;
         max-width: 98%;
@@ -277,14 +280,46 @@ body{
     }
 
     .full-width {
-        width: 98%;
-        max-width: 98%;
+        width: 100%;
+        max-width: 99%;
     }
 
     .btn{
-        padding: 0.5vh 1vw;
-        margin: 0.5vh auto;
-        border-radius: 0.5vh;
-        font-size: 3.5vh;
+        padding: 1vw 1vw;
+        margin: 1vw auto;
+        border-radius: 1vw;
+        font-size: 7vw;
+    }
+
+    .alert {
+        max-width: 98%;
+        font-size: 5vw;
+        padding: 1vw 0;
+        margin: 1vw 1%;
+        border-radius: 1vw;
+    }
+
+    .lyrics {
+        border-radius: 1vw;
+        padding: 2vw 1.1vw;
+        font-size: 5vw;
+        width: 98%;
+        max-width: 96%;
+        margin: 2vw 1%;
+    }
+
+    .collapsed-true .alert-title:after{
+        top: 0.5vw;
+        right: 2vw;
+    }
+    .collapsed-false .alert-title:after{
+        top: 0.5vw;
+        right: 2vw;
+    }
+    .song-title {
+        font-size: 9vw;
+    }
+    .artist-title {
+        font-size: 7vw;
     }
 }
