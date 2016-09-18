@@ -45,6 +45,8 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
                 console.log(response);
                 $scope.flaggedLyrics = response.data.flags;
                 $scope.fullLyrics = response.data.lyrics;
+                $scope.songTitle = response.data.final_song;
+                $scope.artistTitle = response.data.final_artist;
                 if ($scope.flaggedLyrics && $scope.flaggedLyrics.length > 0) {
                     $scope.dirty = true;
                 }

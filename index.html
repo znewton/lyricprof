@@ -26,8 +26,6 @@
         <div class="container">
             <div id="top-space"></div>
 
-            <?= 'Hello World'?>
-
             <div class="form">
                 <div class="form-input">
                     <label for="song-search">Song</label>
@@ -43,6 +41,16 @@
             <div style="margin-top: 10px;" ng-show="searching">
                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
             </div>
+
+            <div id="final-song-title" class="full-width" ng-show="song_found">
+                <span class="song-title">
+                    {{songTitle}}
+                </span>
+                <span class="artist-title">
+                    by {{artistTitle}}
+                </span>
+            </div>
+
             <div class="alert alert-error full-width ng-cloak" ng-show="error">
                 <i class="fa fa-times" aria-hidden="true"></i> Error
                 <div style="font-weight: 500;">

@@ -9,6 +9,11 @@ function myUrlEncode($string) {
     $replacements = array(' ', "&", "'", '?');
     return str_replace($replacements, $entities, $string);
 }
+function myUrlDecode($string) {
+    $entities = array(' ', "&", "'", '?');
+    $replacements = array('_', '%26', '%27', '%3f');
+    return str_replace($replacements, $entities, $string);
+}
 
 $input = file_get_contents("php://input");
 $postdata = json_decode($input);
@@ -68,11 +73,12 @@ function flagLyrics($lyrics, $naughty){
 error_reporting(E_ERROR);
 //$html = file_get_html($url);
 $attempts = 0;
-$div = null;
+$lyricDiv = null;
+$songTitleDiv = null;
 $attemptMultiplier = 3;
 $numFormatChecks = 0; // number of additional formatting attempt checks to try. 0 is base format only
 
-while($attempts < ($attemptMultiplier*($numFormatChecks+1)) && !$div){
+while($attempts < ($attemptMultiplier*($numFormatChecks+1)) && !$lyricDiv){
 
     $searchFormat = alterSearchFormat($attempts, $attemptMultiplier, $song, $artist);
     $search_song = $searchFormat['song'];
@@ -95,7 +101,7 @@ while($attempts < ($attemptMultiplier*($numFormatChecks+1)) && !$div){
     // Load HTML from a string
     $html->load($str);
     if($html && $html->find('div[class=lyricbox]')) {
-        $div = $html->find('div[class=lyricbox]')[0]->plaintext;
+        $lyricDiv = $html->find('div[class=lyricbox]')[0]->plaintext;
     }
     $html->clear();
     unset($html);
@@ -105,9 +111,12 @@ while($attempts < ($attemptMultiplier*($numFormatChecks+1)) && !$div){
 
 
 
-$lyric= html_entity_decode($div);
+$lyric= html_entity_decode($lyricDiv);
 $lyric = str_replace( '&#39;', "'", $lyric);
 $lyric_lines = preg_split('/\n|\r\n?/', $lyric);
+
+$finalSong = ucwords(myUrlDecode($song));
+$finalArtist = ucwords(myUrlDecode($artist));
 
 $data = [
     'recieved' => [
@@ -116,6 +125,8 @@ $data = [
     ],
     'lyrics' => $lyric_lines,
     'flags' => flagLyrics($lyric_lines, naughtyWords),
+    'final_song' => $finalSong,
+    'final_artist' => $finalArtist,
 ];
 
 header('Content-Type:application/json');
