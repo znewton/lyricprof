@@ -46,7 +46,15 @@
                 <i class="fa fa-times" aria-hidden="true"></i> Error
             </div>
             <div class="alert alert-error full-width ng-cloak" ng-show="song_unfound">
-                <i class="fa fa-times" aria-hidden="true"></i> Song Not Found
+                <i class="fa fa-times" aria-hidden="true"></i> Song Not Found <br>
+                <div style="font-weight: 500; text-align: left">
+                    Check
+                    <ul style="margin-top: 0;">
+                        <li>Spelling</li>
+                        <li>Case (mainly for songs that are a few words bunched together)</li>
+                        <li>Spacing (when words <span style="font-style: italic">aren't</span> supposed to be bunched together)</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="alert alert-success full-width" ng-show="song_found && !dirty">
@@ -54,6 +62,14 @@
             </div>
             <div class="alert alert-warning full-width" ng-show="dirty">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Possibly Dirty
+                <div style="font-weight: 500; text-align: left">
+                    Keep in mind
+                    <ul style="margin-top: 0;">
+                        <li>"Hell" shows up in "Hello"</li>
+                        <li>"Shit" shows up in "Bullshit"</li>
+                        <li>Therefore, profanity is very subjective, this just cuts down on reading</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="flagged lyrics" ng-show="dirty">

@@ -15,7 +15,7 @@ function flagLyrics($lyrics, $naughty){
     $flags = [];
     foreach ($lyrics as $line) {
         foreach ($naughty as $naughtyWord){
-            if (strpos($line, $naughtyWord)) {
+            if (stripos($line, $naughtyWord)) {
                 $flags[] = $line;
 //                $flags[] = str_replace($naughtyWord, strtoupper($naughtyWord), $line);
                 break;
@@ -38,7 +38,7 @@ curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_REFERER, $url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 5);
-curl_setopt($curl, CURLOPT_TIMEOUT, 5); //timeout in seconds
+curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
 $str = curl_exec($curl);
 curl_close($curl);
 

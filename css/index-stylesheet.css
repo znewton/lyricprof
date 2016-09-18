@@ -99,6 +99,7 @@ body{
     height: 50px;
 }
 .full-width{
+    min-width: 51%;
     width: 606px;
     display: block !important;
 }
