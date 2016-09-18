@@ -67,22 +67,33 @@ body{
 }
 .form {
     text-align: center;
+    display: block;
+    min-width: 51%;
+    margin: 6px auto;
+    width: 606px;
 }
 .form .form-input{
     display: inline-block;
     position: relative;
     text-align: left;
+    width: 45%;
+}
+.form .form-input:nth-child(1) input{
+    margin-right: 20px;
+}
+.form .form-input:nth-child(2) input{
+    margin-left: 20px;
 }
 .form .form-input input[type=text]{
     display: inline-block;
     height: 25px;
     border: 1px solid #555555;
     border-radius: 5px;
-    width: 300px;
     font-size: 24px;
     padding-left: 6px;
     padding-top: 6px;
     padding-bottom: 6px;
+    width: 100%;
 }
 .form .form-input label{
     display: none;
@@ -127,6 +138,7 @@ body{
     border-width: 1px;
     border-style: solid;
     border-radius: 5px;
+    cursor: pointer;
 }
 .alert-success {
     border-color: #595;
@@ -162,4 +174,35 @@ body{
 }
 .flagged strong{
     color: #e55;
+}
+
+.alert-description {
+    font-weight: 500;
+    text-align: left;
+}
+.collapsed-true .alert-description {
+    height: 0;
+    visibility: collapse;
+}
+.collapsed-false .alert-description{
+    height: unset;
+    visibility: visible;
+}
+
+.alert-title{
+    min-width: 100%;
+    position: relative;
+}
+
+.collapsed-true .alert-title:after{
+    font-family: FontAwesome;
+    content: '\f054';
+    position: absolute;
+    right: 5px;
+}
+.collapsed-false .alert-title:after{
+    font-family: FontAwesome;
+    content: '\f078 ';
+    position: absolute;
+    right: 5px;
 }

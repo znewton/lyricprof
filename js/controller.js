@@ -6,6 +6,8 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
     $scope.clean = false;
     $scope.dirty = false;
     $scope.searching = false;
+    $scope.warningCollapse = true;
+    $scope.errorCollapse = true;
 
     const apiUrl = 'http://api.musixmatch.com/ws/1.1/';
     const trackSearchUrl = 'track.search';
@@ -70,4 +72,11 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
         $scope.song_found = false;
         $scope.song_unfound = true;
     }
+
+    $scope.toggleErrorCollapse = function() {
+        $scope.errorCollapse = !$scope.errorCollapse;
+    };
+    $scope.toggleWarningCollapse = function() {
+        $scope.warningCollapse = !$scope.warningCollapse;
+    };
 }]);

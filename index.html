@@ -49,9 +49,9 @@
                     Try again?
                 </div>
             </div>
-            <div class="alert alert-error full-width ng-cloak" ng-show="song_unfound">
-                <i class="fa fa-times" aria-hidden="true"></i> Song Not Found <br>
-                <div style="font-weight: 500; text-align: left">
+            <div class="alert alert-error full-width ng-cloak collapsed-{{errorCollapse}}" ng-show="song_unfound" ng-click="toggleErrorCollapse()">
+                <div class="alert-title"><i class="fa fa-times" aria-hidden="true"></i> Song Not Found <br></div>
+                <div class="alert-description">
                     Check
                     <ul style="margin-top: 0;">
                         <li>Spelling</li>
@@ -64,9 +64,11 @@
             <div class="alert alert-success full-width" ng-show="song_found && !dirty">
                 <i class="fa fa-check" aria-hidden="true"></i> Clean
             </div>
-            <div class="alert alert-warning full-width" ng-show="dirty">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Possibly Dirty
-                <div style="font-weight: 500; text-align: left">
+            <div class="alert alert-warning full-width collapsed-{{warningCollapse}}" ng-show="dirty" ng-click="toggleWarningCollapse()">
+                <div class="alert-title">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Possibly Dirty
+                </div>
+                <div class="alert-description">
                     Keep in mind
                     <ul style="margin-top: 0;">
                         <li>"Hell" shows up in "Hello"</li>
