@@ -36,20 +36,20 @@ $url="http://lyrics.wikia.com/wiki/" . $artist . ":" . $song;
 // Create a DOM object
 $html = new simple_html_dom();
 //$html = file_get_html($url);
-$attemps = 0;
+$attempts = 0;
 $div = null;
-while($attemps < 20 && !$div){
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_HEADER, false);
-    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_REFERER, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 5);
-    curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+curl_setopt($curl, CURLOPT_HEADER, false);
+curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_REFERER, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 5);
+curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
+
+while($attempts < 20 && !$div){
     $str = curl_exec($curl);
-    curl_close($curl);
 
     // Load HTML from a string
     $html->load($str);
@@ -58,7 +58,9 @@ while($attemps < 20 && !$div){
     }
     $html->clear();
     unset($html);
+    $attempts++;
 }
+curl_close($curl);
 
 
 
