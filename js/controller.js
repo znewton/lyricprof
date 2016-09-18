@@ -46,7 +46,7 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
                 if ($scope.flaggedLyrics && $scope.flaggedLyrics.length > 0) {
                     $scope.dirty = true;
                 }
-                if ($scope.fullLyrics && $scope.fullLyrics.length > 0){
+                if ($scope.fullLyrics && $scope.fullLyrics.length > 1){
                     success();
                 } else {
                     fail();
