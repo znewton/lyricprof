@@ -8,6 +8,7 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
     $scope.searching = false;
     $scope.warningCollapse = true;
     $scope.errorCollapse = true;
+    $scope.profanityProbability = 'Possibly';
 
     const apiUrl = 'http://api.musixmatch.com/ws/1.1/';
     const trackSearchUrl = 'track.search';
@@ -21,6 +22,8 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
         $scope.song_unfound = false;
         $scope.dirty = false;
         $scope.error = false;
+        $scope.warningCollapse = true;
+        $scope.errorCollapse = true;
         console.log('search');
         //https://developer.musixmatch.com/documentation/input-parameters
         var postObj = {
@@ -52,6 +55,17 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
                 $scope.search_artist = response.data.final_artist;
                 if ($scope.flaggedLyrics && $scope.flaggedLyrics.length > 0) {
                     $scope.dirty = true;
+                    if($scope.flaggedLyrics.length > 40){
+                        $scope.profanityProbability = 'Almost Certainly';
+                    } else if($scope.flaggedLyrics.length > 20){
+                        $scope.profanityProbability = 'Most Likely';
+                    } else if($scope.flaggedLyrics.length > 10){
+                        $scope.profanityProbability = 'Probably';
+                    } else if($scope.flaggedLyrics.length > 1){
+                        $scope.profanityProbability = 'Possibly';
+                    } else {
+                        $scope.profanityProbability = 'Maybe';
+                    }
                 }
                 if ($scope.fullLyrics && $scope.fullLyrics.length > 1){
                     success();
