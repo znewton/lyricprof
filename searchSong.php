@@ -34,8 +34,12 @@ function unique_multidim_array($array, $key) {
 
 $input = file_get_contents("php://input");
 $postdata = json_decode($input);
-$song = $postdata->song;
-$song = myUrlEncode($song);
+if($postdata->song) {
+    $song = $postdata->song;
+    $song = myUrlEncode($song);
+} else {
+    $song = null;
+}
 if($postdata->artist) {
     $artist = $postdata->artist;
     $artist = myUrlEncode($artist);
@@ -99,7 +103,7 @@ $attemptMultiplier = 3;
 $numFormatChecks = 0; // number of additional formatting attempt checks to try. 0 is base format only
 
 //Scrape Lyrics
-if($artist) {
+if($artist && $song) {
     while ($attempts < ($attemptMultiplier * ($numFormatChecks + 1)) && !$lyricDiv) {
 
         $searchFormat = alterSearchFormat($attempts, $attemptMultiplier, $song, $artist);
@@ -136,7 +140,7 @@ $attempts = 0;
 $searchDiv = null;
 $attemptMultiplier = 3;
 //Scrape Search
-if(!$artist || !$lyricDiv){
+if(!$lyricDiv){
     while ($attempts < $attemptMultiplier && !$searchDiv) {
 
         $search_song = myUrlEncode($postdata->song, true);

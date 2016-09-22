@@ -41,8 +41,8 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
 //             $scope.song_unfound = true;
 //             console.log(data);
 //         });
-        //&& $scope.search_artist != ''
-        if($scope.search_song != '' ) {
+        //
+        if($scope.search_song != '' || $scope.search_artist != '' ) {
             $scope.searching = true;
             $http.post(testURL, postObj, []).then(function (response) {
                 $scope.searching=false;
