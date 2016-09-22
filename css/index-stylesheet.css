@@ -218,6 +218,29 @@ body{
     font-size: 20px;
     font-weight: 500;
 }
+.search-result{
+    margin: 5px auto;
+}
+.search-result-header {
+    font-size: 24px;
+    font-weight: 600;
+}
+.search-result-item{
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    padding: 5px 5px 5px 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #777;
+    color: #eee;
+    margin-top: 5px;
+    font-size: 20px;
+}
+.search-result-item:hover{
+    box-shadow: 2px 3px 5px #666;
+    cursor: pointer;
+}
 
 @media screen and (max-device-width: 600px) {
     #main{
@@ -324,5 +347,18 @@ body{
     .artist-title {
         font-size: 7vw;
         display: block;
+    }
+
+    .search-result-header {
+        font-size: 7vw;
+    }
+    .search-result-item{
+        width: 100%;
+        max-width: 98vw;
+        padding: 2vw 0 2vw 0;
+        border: 0.5vw solid #555;
+        border-radius: 0.5vw;
+        margin-top: 1vw;
+        font-size: 6vw;
     }
 }

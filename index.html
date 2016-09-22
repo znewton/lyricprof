@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/controller.js"></script>
     <script type="text/javascript" src="js/ngEnter.js"></script>
     <link rel="stylesheet" href="lib/font-awesome-4.6.3/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="lib/favicon-meh-o.ico" />
+    <link rel="shortcut icon" href="lib/favicon-music.ico" />
 </head>
 <body ng-app="app" ng-init="test='Hello World'">
     <div id="main" ng-controller="ctrl">
@@ -97,6 +97,13 @@
                 <span style="font-weight: 600; opacity: 0.5;">Full Lyrics</span>
                 <div ng-repeat="l in fullLyrics track by $index">
                     {{l}}
+                </div>
+            </div>
+
+            <div class="search-result full-width" ng-show="song_unfound">
+                <div class="search-result-header"> Did you Mean:</div>
+                <div class="search-result-item" ng-repeat="i in searchLinkList track by $index" ng-click="searchFromLink(i.song, i.artist)">
+                    {{i.song}} by {{i.artist}}
                 </div>
             </div>
         </div>
