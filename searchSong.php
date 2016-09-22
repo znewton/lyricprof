@@ -141,18 +141,19 @@ if(!$artist || !$lyricDiv){
 
         $search_song = myUrlEncode($postdata->song, true);
         if($postdata->artist){
-            $search_artist = myUrlEncode($postdata->song, true);
+            $search_artist = myUrlEncode($postdata->artist, true);
         } else {
             $search_artist = '';
         }
-        $url = "http://lyrics.wikia.com/wiki/Special:Search?search=" . $search_song . "+" . $search_artist . '&fulltext=Search&page=1&ns0=1';
+//        $surl = "http://lyrics.wikia.com/wiki/Special:Search?search=" . $search_song . "+" . $search_artist . '&fulltext=Search&page=1&ns0=1';
+        $surl = "http://lyrics.wikia.com/wiki/Special:Search?search=" .$search_artist . '%3A' . $search_song . '&fulltext=Search';
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($curl, CURLOPT_HEADER, false);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_REFERER, $url);
+        curl_setopt($curl, CURLOPT_URL, $surl);
+        curl_setopt($curl, CURLOPT_REFERER, $surl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
@@ -163,14 +164,20 @@ if(!$artist || !$lyricDiv){
         // Load HTML from a string
         $html->load($str);
         $searchDiv = [];
+        //For Lyric Wikia Search
         if ($html && $html->find('a[class=result-link]')) {
             $list = $html->find('a[class=result-link]');
             for($i = 0; $i < count($list); $i++){
-                $searchDiv[] = $list[$i];
-                $i++;
+                if($i>0 && $list[$i]->href != $list[$i-1]->href)
+                    $searchDiv[] = $list[$i]->href;
+                elseif ($i==0)
+                    $searchDiv[] = $list[$i]->href;
             }
+//            foreach ($list as $key => $val){
+//                $searchDiv[] = $val->href;
+//            }
 //            $searchDiv = unique_multidim_array($searchDiv, 'attr');
-            $searchDiv = array_slice($searchDiv, 0, 20);
+            $searchDiv = array_slice($searchDiv, 0, 10);
         }
         $html->clear();
         unset($html);
@@ -194,6 +201,7 @@ $data = [
     'lyrics' => $lyric_lines,
     'flags' => flagLyrics($lyric_lines, naughtyWords),
     'final_song' => $finalSong,
+    'url' => $surl,
     'final_artist' => $finalArtist,
     'search_result' => $searchDiv,
 ];

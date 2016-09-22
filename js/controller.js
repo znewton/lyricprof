@@ -101,7 +101,7 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
         var colonIndex = 0;
         for(var i = 0; i < $scope.searchResult.length; i++){
             // console.log()
-            link = $scope.searchResult[i]['attr'].href;
+            link = $scope.searchResult[i];
             link = link.replace('http://lyrics.wikia.com/wiki/', '');
             colonIndex = link.indexOf(':');
             artist = decodeURIComponent(link.substring(0, colonIndex)).replace(/_/g, ' ');
