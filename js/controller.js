@@ -103,13 +103,16 @@ app.controller('ctrl', ['$scope', '$http', function($scope, $http) {
             // console.log()
             link = $scope.searchResult[i];
             link = link.replace('http://lyrics.wikia.com/wiki/', '');
+            link = link.replace('http://lyrics.wikia.com/', '');
             colonIndex = link.indexOf(':');
             artist = decodeURIComponent(link.substring(0, colonIndex)).replace(/_/g, ' ');
             song = decodeURIComponent(link.substr(colonIndex+1)).replace(/_/g, ' ');
-            $scope.searchLinkList.push({
-                artist: artist,
-                song: song
-            })
+            if(artist != '' && song != '') {
+                $scope.searchLinkList.push({
+                    artist: artist,
+                    song: song
+                });
+            }
         }
         $scope.song_found = false;
         $scope.song_unfound = true;
