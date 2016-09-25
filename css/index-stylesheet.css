@@ -242,7 +242,127 @@ body{
     cursor: pointer;
 }
 
-@media screen and (max-device-width: 600px) {
+@media screen and (max-device-width: 800px) {
+    #main{
+        height: 100vh;
+        width: 100vw;
+    }
+    #site-navbar {
+        position: fixed;
+        height: 10vw;
+        width: 100vw;
+    }
+    #site-navbar a {
+        height: 10vw;
+        font-size: 6vw;
+        /*display: table-cell;*/
+        padding-left: 1vw;
+        padding-right: 1vw;
+    }
+    #site-navbar #brand-logo {
+        font-size: 7vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+
+    .container {
+        width: 100vw;
+        min-height: 100vh;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+        font-size: 4vw;
+    }
+    #top-space {
+        height: 11vw;
+    }
+    .form{
+        max-width: 99%;
+        width: 97%;
+        margin: 0 1%;
+    }
+    .form .form-input {
+        width: 100%;
+        margin-bottom: 2vw;
+    }
+    .form .form-input:nth-child(1) input{
+        margin-right: 0;
+    }
+    .form .form-input:nth-child(2) input{
+        margin-left: 0;
+    }
+    .form .form-input input[type=text]{
+        display: block;
+        height: 9vw;
+        border-radius: 1vw;
+        font-size: 6vw;
+        padding-left: 3vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        max-width: 98%;
+        width: 98%;
+    }
+
+    .full-width {
+        width: 100%;
+        max-width: 99%;
+    }
+
+    .btn{
+        padding: 1vw 1vw;
+        margin: 1vw auto;
+        border-radius: 1vw;
+        font-size: 7vw;
+    }
+
+    .alert {
+        max-width: 98%;
+        font-size: 5vw;
+        padding: 1vw 0;
+        margin: 1vw 1%;
+        border-radius: 1vw;
+    }
+
+    .lyrics {
+        border-radius: 1vw;
+        padding: 2vw 1.1vw;
+        font-size: 5vw;
+        width: 98%;
+        max-width: 96%;
+        margin: 2vw 1%;
+    }
+
+    .collapsed-true .alert-title:after{
+        top: 0.5vw;
+        right: 2vw;
+    }
+    .collapsed-false .alert-title:after{
+        top: 0.5vw;
+        right: 2vw;
+    }
+    .song-title {
+        font-size: 9vw;
+        display: block;
+    }
+    .artist-title {
+        font-size: 7vw;
+        display: block;
+    }
+
+    .search-result-header {
+        font-size: 7vw;
+    }
+    .search-result-item{
+        width: 100%;
+        max-width: 98vw;
+        padding: 2vw 0 2vw 0;
+        border: 0.5vw solid #555;
+        border-radius: 0.5vw;
+        margin-top: 1vw;
+        font-size: 6vw;
+    }
+}
+@media screen and (max-width: 800px) {
     #main{
         height: 100vh;
         width: 100vw;

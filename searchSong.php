@@ -32,21 +32,6 @@ function unique_multidim_array($array, $key) {
     return $temp_array;
 }
 
-$input = file_get_contents("php://input");
-$postdata = json_decode($input);
-if($postdata->song) {
-    $song = $postdata->song;
-    $song = myUrlEncode($song);
-} else {
-    $song = null;
-}
-if($postdata->artist) {
-    $artist = $postdata->artist;
-    $artist = myUrlEncode($artist);
-} else {
-    $artist = null;
-}
-
 /**
  * @param $attemptNum
  * @param $attemptMultiplier
@@ -75,6 +60,15 @@ function alterSearchFormat($attemptNum, $attemptMultiplier,  $song, $artist) {
      ];
 }
 
+function generatePossibilities($query){
+    $possibilities = [];
+    $possibilities[] = myUrlEncode($query);
+    $possibilities[] = myUrlEncode(str_ireplace('and', '%26', $query));
+    $possibilities[] = myUrlEncode('the ' . $query);
+//    $possibilities[] = myUrlEncode(str_ireplace(',', '', $query));
+    return $possibilities;
+}
+
 function flagLyrics($lyrics, $naughty){
     $flags = [];
     foreach ($lyrics as $line) {
@@ -92,6 +86,25 @@ function flagLyrics($lyrics, $naughty){
     }
     return $flags;
 }
+
+$input = file_get_contents("php://input");
+$postdata = json_decode($input);
+if($postdata->song) {
+    $song = $postdata->song;
+    $song = myUrlEncode($song);
+    $song_possibilities = generatePossibilities($song);
+} else {
+    $song = null;
+    $song_possibilities = null;
+}
+if($postdata->artist) {
+    $artist = $postdata->artist;
+    $artist = myUrlEncode($artist);
+    $artist_possibilities = generatePossibilities($artist);
+} else {
+    $artist = null;
+    $artist_possibilities = null;
+}
 //
 //$url = 'http://www.azlyrics.com/lyrics/'.$artist.'/'.$song.'.html';
 //
@@ -99,46 +112,56 @@ error_reporting(E_ERROR);
 //$html = file_get_html($url);
 $attempts = 0;
 $lyricDiv = null;
-$attemptMultiplier = 3;
+$attemptMultiplier = 1;
 $numFormatChecks = 0; // number of additional formatting attempt checks to try. 0 is base format only
+$finalSong = null;
+$finalArtist = null;
+
+$searchLog = [];
 
 //Scrape Lyrics
-if($artist && $song) {
-    while ($attempts < ($attemptMultiplier * ($numFormatChecks + 1)) && !$lyricDiv) {
+if($artist_possibilities && $song_possibilities) {
+    $song_pos_counter = 0;
+    $artist_pos_counter = 0;
+    for($s = 0; $s < count($song_possibilities); $s++){
+        $search_song = $song_possibilities[$s];
+        for($a = 0; $a < count($artist_possibilities); $a++) {
+            $search_artist = $artist_possibilities[$a];
+            $url = "http://lyrics.wikia.com/wiki/" . $search_artist . ":" . $search_song;
+            $searchLog[] = $url;
+            $attempts = 0;
+            while ($attempts < $attemptMultiplier && !$lyricDiv) {
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_REFERER, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+                curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
+                $str = curl_exec($curl);
+                // Create a DOM object
+                $html = new simple_html_dom();
 
-        $searchFormat = alterSearchFormat($attempts, $attemptMultiplier, $song, $artist);
-        $search_song = $searchFormat['song'];
-        $search_artist = $searchFormat['artist'];
-        $url = "http://lyrics.wikia.com/wiki/" . $search_artist . ":" . $search_song;
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($curl, CURLOPT_HEADER, false);
-        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_REFERER, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10); //timeout in seconds
-        $str = curl_exec($curl);
-        // Create a DOM object
-        $html = new simple_html_dom();
-
-        // Load HTML from a string
-        $html->load($str);
-        if ($html && $html->find('div[class=lyricbox]')) {
-            $lyricDiv = $html->find('div[class=lyricbox]')[0]->plaintext;
+                // Load HTML from a string
+                $html->load($str);
+                if ($html && $html->find('div[class=lyricbox]')) {
+                    $lyricDiv = $html->find('div[class=lyricbox]')[0]->plaintext;
+                    $finalSong = ucwords(myUrlDecode($search_song));
+                    $finalArtist = ucwords(myUrlDecode($search_artist));
+                }
+                $html->clear();
+                unset($html);
+                curl_close($curl);
+                $attempts++;
+            }
         }
-        $html->clear();
-        unset($html);
-        curl_close($curl);
-        $attempts++;
     }
 }
 
 $attempts = 0;
 $searchDiv = null;
-$attemptMultiplier = 3;
 //Scrape Search
 if(!$lyricDiv){
     while ($attempts < $attemptMultiplier && !$searchDiv) {
@@ -177,10 +200,6 @@ if(!$lyricDiv){
                 elseif ($i==0)
                     $searchDiv[] = $list[$i]->href;
             }
-//            foreach ($list as $key => $val){
-//                $searchDiv[] = $val->href;
-//            }
-//            $searchDiv = unique_multidim_array($searchDiv, 'attr');
             $searchDiv = array_slice($searchDiv, 0, 10);
         }
         $html->clear();
@@ -194,8 +213,12 @@ $lyric= html_entity_decode($lyricDiv);
 $lyric = str_replace( '&#39;', "'", $lyric);
 $lyric_lines = preg_split('/\n|\r\n?/', $lyric);
 
-$finalSong = ucwords(myUrlDecode($song));
-$finalArtist = ucwords(myUrlDecode($artist));
+if(!$finalArtist){
+    $finalArtist = ucwords(myUrlDecode($artist));
+}
+if(!$finalSong){
+    $finalSong = ucwords(myUrlDecode($song));
+}
 
 $data = [
     'recieved' => [
@@ -204,8 +227,8 @@ $data = [
     ],
     'lyrics' => $lyric_lines,
     'flags' => flagLyrics($lyric_lines, naughtyWords),
+    'searchLog' => $searchLog,
     'final_song' => $finalSong,
-    'url' => $surl,
     'final_artist' => $finalArtist,
     'search_result' => $searchDiv,
 ];
