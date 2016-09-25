@@ -12,3 +12,6 @@ My friend, a radio DJ at KURE, thought it would be very handy to have a site tha
 ## Response
 This app actually won the "Googliest Hack" award at HackISU Fall 2016 (alongside prep4.tech) for embodying Google's mission to bring the world's information to more people, which was pretty exciting for me.
 The KURE staff is thrilled!
+
+## Try it out!
+[www.lyricprof.com](http://www.lyricprof.com)
