@@ -37,7 +37,7 @@ HTML;
 	echo $component->alert('{{profanityProbability}} Dirty ({{flaggedLyrics.length}}/{{fullLyrics.length}} Lines Flagged)', 'warning ng-cloak', true, $description, ['ng-show'=>'dirty']) ?>
 
 	<div class="flagged well" ng-show="dirty">
-		<strong>Flagged Lyrics</strong>
+		<strong style="opacity:0.7;">Flagged Lyrics</strong>
 		<div ng-repeat="l in flaggedLyrics track by $index" ng-bind-html="l"></div>
 	</div>
 

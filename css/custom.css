@@ -15,10 +15,10 @@
 }
 .btn-custom {
 	color: #fff;
-	border-color: #B2561A;
+	border-color: #D55E11;
 }
 .btn-custom::after {
-	background-color: #B2561A;
+	background-color: #D55E11;
 }
 .btn-custom::before {
 	background-color: #E56E21;
