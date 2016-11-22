@@ -35,8 +35,8 @@ class ViewRenderer
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>LyricProf</title>
-	<meta name="description" content="My own framework with my own theme" />
-	<meta name="keywords" content="framework, theme, php, js, css, html" />
+	<meta name="description" content="Check your favorite songs for profanity" />
+	<meta name="keywords" content="lyrics, profanity, FCC" />
 	<meta name="author" content="znewton" />
 	<link rel="stylesheet" href="/lib/css/view.css">
 	<link rel="stylesheet" href="/lib/css/components.css">
