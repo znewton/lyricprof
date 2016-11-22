@@ -116,7 +116,7 @@ HTML;
 		return <<<HTML
 <footer>
 <div class="footer-section footer-info">
-	<a href="/">{$logo}</a>
+	<a href="http://znewton.xyz">{$logo}</a>
 	<a href="mailto:znewton13@gmail.com">znewton13@gmail.com</a>
 </div>
 <div class="footer-section footer-social">
