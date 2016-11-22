@@ -1,0 +1,57 @@
+<?php $component = new ComponentRenderer(); ?>
+<article ng-app="app" ng-controller="ctrl">
+	<div class="form">
+		<?= $component->formTextElement('Song', 'song', 'song-search', 'text', false, ['ng-model'=>'search_song','ng-enter'=>'search()']) ?>
+		<?= $component->formTextElement('Artist', 'artist', 'artist-search', 'text', false, ['ng-model'=>'search_artist','ng-enter'=>'search()']) ?>
+		<?= $component->button('button', 'Search', 'custom btn-block', 'search', ['ng-click'=>'search()']) ?>
+	</div>
+	<div style="margin-top: 10px;" ng-show="searching">
+		<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+	</div>
+
+	<div id="final-song-title" class="full-width" ng-show="song_found">
+			<h3>{{songTitle}} <small>by {{artistTitle}}</small></h3>
+	</div>
+
+	<?= $component->alert('Something went wrong! Try again?', 'error ng-cloak', true, "If it doesn't work after a couple tries, please contact me at <a href='mailto:znewton13@gmail.com'>znewton13@gmail.com</a>", ['ng-show'=>'error']) ?>
+	<?php
+	$description = <<<HTML
+Check
+<ul style="margin-top: 0;">
+	<li>Spelling</li>
+	<li>Case (mainly for songs that are a few words bunched together)</li>
+	<li>Spacing (when words <span style="font-style: italic">aren't</span> supposed to be bunched together)</li>
+</ul>
+HTML;
+	echo $component->alert('Song Not Found', 'error ng-cloak', true, $description, ['ng-show'=>'song_unfound']); ?>
+	<?= $component->alert('Clean!', 'success ng-cloak', false, '', ['ng-show'=>'song_found && !dirty']) ?>
+	<?php
+	$description = <<<HTML
+Keep in mind
+<ul style="margin-top: 0;">
+	<li>"Hell" shows up in "Hello"</li>
+	<li>"Shit" shows up in "Bullshit"</li>
+	<li>Therefore, profanity is very subjective, this just cuts down on reading</li>
+</ul>
+HTML;
+	echo $component->alert('{{profanityProbability}} Dirty ({{flaggedLyrics.length}}/{{fullLyrics.length}} Lines Flagged)', 'warning ng-cloak', true, $description, ['ng-show'=>'dirty']) ?>
+
+	<div class="flagged well" ng-show="dirty">
+		<strong>Flagged Lyrics</strong>
+		<div ng-repeat="l in flaggedLyrics track by $index" ng-bind-html="l"></div>
+	</div>
+
+	<div class="well" ng-show="song_found">
+		<span style="font-weight: 600; opacity: 0.5;">Full Lyrics</span>
+		<div ng-repeat="l in fullLyrics track by $index">
+			{{l}}
+		</div>
+	</div>
+
+	<div class="search-result full-width" ng-show="song_unfound">
+		<div class="search-result-header"> Did you Mean:</div>
+		<a class="search-result-item" ng-repeat="i in searchLinkList track by $index" ng-click="searchFromLink(i.song, i.artist)" href="#">
+			{{i.song}} by {{i.artist}}
+		</a>
+	</div>
+</article>
