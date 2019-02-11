@@ -1,0 +1,21 @@
+{
+  "name": "lyricprof",
+  "version": "1.0.0",
+  "description": "A web app that checks song lyrics for possible FCC profanity violations.",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "now-build": "./scripts/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znewton/lyricprof.git"
+  },
+  "author": "Zach Newton <zach@znewton.xyz>",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/znewton/lyricprof/issues"
+  },
+  "homepage": "https://github.com/znewton/lyricprof#readme"
+}

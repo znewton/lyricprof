@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "lyricprof",
+  "alias": ["lyricprof.znewton.xyz", "www.lyricprof.znewton.xyz"],
+  "builds": [
+    { "src": "*.php", "use": "@now/php" },
+    { "src": "css/**/*", "use": "@now/static" },
+    { "src": "js/**/*", "use": "@now/static" },
+    { "src": "views/**/*", "use": "@now/static" },
+    { "src": "lib/**/*", "use": "@now/static" },
+    { "src": ".htaccess", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/index.php" },
+    { "src": "/about", "dest": "/index.php" }
+  ]
+}

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ -d "build" ]; then
+  rm -rf build
+fi
+mkdir build
+cp -r index.php css js lib views searchSong.php .htaccess build/
