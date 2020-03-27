@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "lyricprof",
-  "alias": ["lyricprof.znewton.xyz", "www.lyricprof.znewton.xyz"],
+  "alias": ["lyricprof.znewton.dev"],
   "builds": [
     { "src": "*.php", "use": "@now/php" },
     { "src": "css/**/*", "use": "@now/static" },
